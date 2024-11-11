@@ -10,9 +10,10 @@ from "@livekit/components-react";
 import { ConnectionState } from "livekit-client";
 import { useEffect, useMemo, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
-import { ChatHeader } from "./chat-header";
-import { ChatForm } from "./chat-form";
-import ChatList from "./chat-list";
+import { ChatHeader, ChatHeaderSkeleton } from "./chat-header";
+import { ChatForm, ChatFormSkeleton } from "./chat-form";
+import ChatList, { ChatListSkeleton } from "./chat-list";
+import ChatCommunity from "./chat-community";
 
 interface ChatProps{
     hostname: string;
@@ -40,7 +41,7 @@ export const Chat = ({
 
     const isOnline = participant && connectionState === ConnectionState.Connected;
     
-    const isHidden = !isChatDelayed || !isOnline;
+    const isHidden = !isChatEnabled || !isOnline;
 
     const [value,setValue] = useState("");
     const {chatMessages: messages, send} = useChat();
@@ -89,10 +90,22 @@ export const Chat = ({
                 </>
             )}
             {variant === ChatVariant.COMMUNITY && (
-                <>
-                    <p>Community Mode</p>
-                </>
+                <ChatCommunity 
+                    viewerName={viewerName}
+                    hostname={hostname}
+                    isHidden={isHidden}
+                />
             )}
         </div>
     )
+}
+
+export const ChatSkeleton = () => {
+    return(
+        <div className="flex flex-col border-l border-b pt-0 h-[calc(100vh-80px)] border-2">
+            <ChatHeaderSkeleton />
+            <ChatListSkeleton />
+            <ChatFormSkeleton />
+        </div>
+    );
 }
