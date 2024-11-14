@@ -20,7 +20,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "GameHub",
+  title: "Game Hub",
   description: "GameHub is a platform for gamers to connect, share,discover and play games.",
   
 };
