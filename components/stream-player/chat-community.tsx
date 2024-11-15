@@ -1,10 +1,10 @@
 "use client"
 
 import { useParticipants } from "@livekit/components-react";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
-import { useDebounceCallback, useDebounceValue } from "usehooks-ts";
+import { useDebounceValue } from "usehooks-ts";
 import { CommunityItem } from "./community-item";
 import { LocalParticipant, RemoteParticipant } from "livekit-client";
 
@@ -19,7 +19,7 @@ const ChatCommunity = ({
     viewerName,
     isHidden
 }: ChatCommunityProps) => {
-    let value = "";
+    const value = "";
     const [debouncedValue, setValue] = useDebounceValue<string>(value, 500);
 
     const participants = useParticipants();

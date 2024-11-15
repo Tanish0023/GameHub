@@ -44,15 +44,7 @@ export const Actions = ({
     const handleBlock = () => {
         startTransition(() => {
             onBlock(userId)
-                .then((data)=> toast.success(`You have Blocked ${data.blocked.username}`))
-                .catch(()=> toast.error("Something Went Wrong"))
-        })
-    }
-
-    const handleUnblock = () => {
-        startTransition(() => {
-            onUnblock(userId)
-                .then((data)=> toast.success(`You have Unblocked ${data.blocked.username}`))
+                .then((data)=> toast.success(`You have Blocked ${data?.blocked.username}`))
                 .catch(()=> toast.error("Something Went Wrong"))
         })
     }
