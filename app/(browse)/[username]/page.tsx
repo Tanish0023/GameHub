@@ -5,16 +5,14 @@ import { getUserByUsername } from "@/lib/user-service";
 import { isBlockedByUser } from "@/lib/block-service";
 import { StreamPlayer } from "@/components/stream-player";
 
-interface UserPageProps{
-    params:{
-        username:string;
-    }
-}
+type UserPageProps = {
+    params: Promise<{ username: string }>;
+  };
+  
 
-const UserPage = async ({
-    params
-}: UserPageProps) => {
-    const {username} = await params;
+  async function UserPage({ params }: UserPageProps) {
+    const resolvedParams = await params;
+    const { username } = resolvedParams;
     const user = await getUserByUsername(username);
     if(!user || !user.stream){
         notFound();

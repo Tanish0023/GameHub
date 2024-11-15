@@ -7,7 +7,6 @@ const nextConfig: NextConfig = {
       "utfs.io"
     ]
   },
-  runtime: 'nodejs',
 };
 
 export default nextConfig;
