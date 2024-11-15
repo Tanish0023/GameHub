@@ -6,7 +6,8 @@ const nextConfig: NextConfig = {
     domains:[
       "utfs.io"
     ]
-  }
+  },
+  runtime: 'nodejs',
 };
 
 export default nextConfig;
