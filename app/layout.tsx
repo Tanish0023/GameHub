@@ -31,7 +31,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider appearance={{baseTheme:dark}}>
+    <ClerkProvider appearance={{baseTheme:dark}}
+      signInFallbackRedirectUrl="/"
+      signUpFallbackRedirectUrl="/"
+    >
       <html lang="en" suppressHydrationWarning>
         {/* //TODO: Learn How to add favicon */}
         {/* <head>
