@@ -4,12 +4,12 @@ import Navbar from "./_components/navbar";
 import Sidebar from "./_components/sidebar";
 import Container from "./_components/container";
 
-interface CreatorLayoutProps{
-    params: {
-        username: string
-    },
-    children: React.ReactNode
-}
+interface CreatorLayoutProps {
+    params: Promise<{
+      username: string;
+    }>;
+    children: React.ReactNode;
+  }
 
 const CreatorLayout = async ({
     params,
