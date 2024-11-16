@@ -3,14 +3,14 @@ import { getUserByUsername } from "@/lib/user-service";
 import { currentUser } from "@clerk/nextjs/server";
 
 interface CreatorPageProps {
-  params: {
-    username: string;
-  };
-}
+    params: Promise<{
+      username: string;
+    }>;
+  }
 
 const CreatorPage = async ({ params }: CreatorPageProps) => {
   const externalUser = await currentUser();
-  const { username } = params; // No need for `await` here
+  const { username } = await params; // No need for `await` here
   const user = await getUserByUsername(username);
 
   if (!user || user.externalUserId !== externalUser?.id || !user.stream) {
