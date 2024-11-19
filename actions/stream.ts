@@ -14,10 +14,12 @@ export const updateStream = async (values: Partial<Stream>) => {
                 userId: self!.id
             }
         })
-
+        console.log("Hellooo1");
+        
         if(!selfStream){
             throw new Error("Stream not found")
         }
+        console.log("Hellooo2");
 
         const validData = {
             thumbnailUrl: values.thumbnailUrl,
@@ -26,6 +28,7 @@ export const updateStream = async (values: Partial<Stream>) => {
             isChatFollowersOnly: values.isChatFollowersOnly,
             isChatDelayed: values.isChatDelayed
         };
+        console.log("Hellooo3");
 
         const stream = await db.stream.update({
             where:{
@@ -35,13 +38,15 @@ export const updateStream = async (values: Partial<Stream>) => {
                 ...validData
             }
         })
+        console.log("Hellooo4");
 
         revalidatePath(`/u/${self?.username}/chat`)
         revalidatePath(`/u/${self?.username}`)
         revalidatePath(`/${self?.username}`)
-
+        console.log(stream);
+        
         return stream;
     } catch{
-        throw new Error("Internal Server Error")
+        throw new Error("[STREAM]: Internal Server Error")
     }
 }
