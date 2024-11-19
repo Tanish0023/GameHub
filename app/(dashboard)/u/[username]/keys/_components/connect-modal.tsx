@@ -34,6 +34,8 @@ const WHIP = String(IngressInput.WHIP_INPUT)
 type IngressType = typeof RTMP | typeof WHIP;
 
 const ConnectModal = () => {
+    console.log("CONNECTMODAL");
+    
     const closeRef = useRef<ElementRef<"button">>(null)
     const [isPending,startTransition] = useTransition()
     const [ingressType,setIngressType] = useState<IngressType>(RTMP)
