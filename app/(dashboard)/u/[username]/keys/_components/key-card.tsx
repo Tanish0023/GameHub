@@ -13,9 +13,6 @@ const KeyCard = ({
     value
 }: KeyCardProps) => {
     const [show, setShow] = useState(false);
-    console.log("KEY CARD");
-    
-    console.log(show);
     
     return ( 
         <div className="rounded-xl bg-muted p-6">

@@ -10,10 +10,13 @@ const receiver = new WebhookReceiver(
 );
 
 export async function POST(req: Request) {
+  console.log("LJBadsh");
+  
   const body = await req.text();
   const headerPayload = await headers();
   const authorization = headerPayload.get("Authorization");
-
+  console.log(headerPayload);
+  
   if (!authorization) {
     return new NextResponse("No authorization header", { status: 400 });
   }

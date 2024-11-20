@@ -21,7 +21,11 @@ const roomService = new RoomServiceClient(
     process.env.LIVEKIT_API_SECRET!,
 );
 
-const ingressClient = new IngressClient(process.env.LIVEKIT_API_URL!);
+const ingressClient = new IngressClient(
+    process.env.LIVEKIT_API_URL!,
+    process.env.LIVEKIT_API_KEY!,
+    process.env.LIVEKIT_API_SECRET!
+);
 
 export const resetIngresses = async (hostIdentity: string) => {
     const ingresses = await ingressClient.listIngress({
@@ -55,7 +59,7 @@ export const createIngress = async (ingressType: IngressInput) => {
 
     if(ingressType === IngressInput.WHIP_INPUT){
         options.bypassTranscoding = true;
-    }else{
+    }else{        
         options.video = {
             source: TrackSource.CAMERA,
             preset: IngressVideoEncodingPreset.H264_1080P_30FPS_3_LAYERS
@@ -63,14 +67,19 @@ export const createIngress = async (ingressType: IngressInput) => {
         options.audio = {
             source: TrackSource.MICROPHONE,
             preset: IngressAudioEncodingPreset.OPUS_STEREO_96KBPS
-        }
+        }        
     }
-
+    
+    console.log(ingressType,
+        options);
+    
     const ingress = await ingressClient.createIngress(
         ingressType,
         options
     )
-
+    console.log(ingress);
+    console.log(!ingress || !ingress.url || !ingress.streamKey);
+    
     if(!ingress || !ingress.url || !ingress.streamKey){
         throw new Error("Failed to create ingress");
     }
